@@ -24,16 +24,19 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->enum('status',['PUBLISHED','DRAFT'])->default('DRAFT');
             $table->string('file',128)->nullable();
+             //relation
+             $table->foreign('user_id')->references('id')->on('users')
+             ->onDelete('cascade')
+             ->onUpdate('cascade');;
+             $table->foreign('category_id')->references('id')->on('categories')
+             ->onDelete('cascade')
+             ->onUpdate('cascade');;
+
             $table->timestamps();
 
-            //relation
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('category_id')->references('id')->on('categories')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');    
+           
+            
+                    
         });
     }
 
